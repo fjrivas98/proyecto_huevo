@@ -1,12 +1,13 @@
 <template>
-  <div class="content" v-if="databases != null">
-    <div v-if="all">
-      <div :key=item v-for="item in databases">{{item}} <button @click="deleteDatabase(item)">Eliminar</button></div>
-      <input type="text"  v-model="value_input" id="database-input" name="database">
-      <button  @click="createDatabase()">Create database</button>
-      <div
-          class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
-        >
+<div>
+  Componente hijo NAME {{name}}
+  <!-- <div class="content" v-if="databases != null"> -->
+    <!-- <div :key=item v-for="item in databases">{{item}} <button @click="deleteDatabase(item)">Eliminar</button></div>
+    <input type="text"  v-model="value_input" id="database-input" name="database">
+    <button  @click="createDatabase()">Create database</button>
+    <div
+        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
+      >
         <md-card>
           <md-card-header data-background-color="green">
             <h4 class="title">Simple Table</h4>
@@ -18,21 +19,13 @@
                 <md-table-row :key=item v-for="item in databases"  slot="md-table-row" >
                   <md-table-cell md-label="Name">{{item}}</md-table-cell>
                   <md-table-cell md-label="Delete"><md-button @click="deleteDatabase(item)" class="red-btn">delete</md-button></md-table-cell>
-                   <md-table-cell md-label="Show"><button @click="show(item)">Visualizar</button></md-table-cell>
+                   <md-table-cell md-label="Show"><button @click="showDb(item)">Visualizar</button></md-table-cell>
                 </md-table-row>
               </md-table>
             </div>
           </md-card-content>
         </md-card>
-      </div>
-    </div>
-    <div v-else>
-      <databaseview
-      :name="namedb"
-      >
-      </databaseview>
-    </div>
-    
+      </div> -->
   </div>
 </template>
 <style>
@@ -43,27 +36,23 @@ const $ = require('jquery')
 
 import Swal from 'sweetalert2'
 
-import {Databaseview} from "@/components";
-
 export default {
   
   components: {
-    Databaseview
+
   },
-  name:"papa",
+  props: {
+    name:String
+  },
   methods:{
-    show(name){
-      this.all = false;
-      this.namedb = name
-    },
     refreshData(){
       var that = this;
       $.ajax({
-            url: "http://localhost/proyecto/proyecto/public/prueba3.php",
+            url: "http://localhost/proyecto/proyecto/public/create_tables.php?name="+that.name,
             type: 'get',
             dataType: "json",
             success: function (data) {
-                that.databases = data;
+                that.tables = data;
             },
             error: function (jqXHR, textStatus, error) {
               console.error(error)
@@ -140,9 +129,7 @@ export default {
   data() {
     return {
       value_input:"",
-      databases:null,
-      namedb:"",
-      all:true
+      tables:null
     };
   }
 };

@@ -14,7 +14,7 @@
           </md-card-content>
         </md-card>
       </div>
-
+      <databaseview></databaseview>
       <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
       >
@@ -33,10 +33,11 @@
 </template>
 
 <script>
-import { SimpleTable, OrderedTable } from "@/components";
+import { SimpleTable, OrderedTable ,Databaseview} from "@/components";
 
 export default {
   components: {
+    Databaseview,
     OrderedTable,
     SimpleTable
   }
