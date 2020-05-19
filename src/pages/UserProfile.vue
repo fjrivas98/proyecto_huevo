@@ -3,7 +3,7 @@
     <input type="text" placeholder="nuevo usuario" v-model="db_user" id="user-input" name="user">
     <input type="password" placeholder="contraseña"  v-model="db_password" id="password-input" name="password">
 
-    <button  @click="createUser()">Create database</button>
+    <button  @click="createUser()">Crear Usuario</button>
 
 
     <div id='example-3' class="container-check">
@@ -132,73 +132,61 @@
             <div class="b-input"></div>
             </label>
 
-            <!-- <label class="b-contain">
-            <span>alter</span>
-            <input class="group_form" type="checkbox" id="alter" value="alter" v-model="checkedNames">
+            <label class="b-contain">
+            <span>Process</span>
+            <input class="group_form" type="checkbox" id="process" value="process" v-model="checkedNames">
             <div class="b-input"></div>
             </label>
 
             <label class="b-contain">
-            <span>index</span>
-            <input class="group_form" type="checkbox" id="index" value="index" v-model="checkedNames">
-            <div class="b-input"></div>
-            </label>
-
-
-            <label class="b-contain">
-            <span>drop</span>
-            <input class="group_form" type="checkbox" id="drop" value="drop" v-model="checkedNames">
+            <span>Reload</span>
+            <input class="group_form" type="checkbox" id="reload" value="reload" v-model="checkedNames">
             <div class="b-input"></div>
             </label>
 
 
             <label class="b-contain">
-            <span>create temporary tables</span>
-            <input class="group_form" type="checkbox" id="create_temp" value="create temporary tables" v-model="checkedNames">
+            <span>Shutdown</span>
+            <input class="group_form" type="checkbox" id="shutdown" value="shutdown" v-model="checkedNames">
+            <div class="b-input"></div>
+            </label>
+
+
+            <label class="b-contain">
+            <span>show databases</span>
+            <input class="group_form" type="checkbox" id="show_db" value="show databases" v-model="checkedNames">
             <div class="b-input"></div>
             </label>
 
             <label class="b-contain">
-            <span>show view</span>
-            <input class="group_form" type="checkbox" id="show_view" value="show view" v-model="checkedNames">
+            <span>lock tables</span>
+            <input class="group_form" type="checkbox" id="lock_tables" value="lock tables" v-model="checkedNames">
             <div class="b-input"></div>
             </label>
 
             <label class="b-contain">
-            <span>create routine</span>
-            <input class="group_form" type="checkbox" id="create_routine" value="create routine" v-model="checkedNames">
+            <span>references</span>
+            <input class="group_form" type="checkbox" id="references" value="references" v-model="checkedNames">
             <div class="b-input"></div>
             </label>
 
             <label class="b-contain">
-            <span>alter routine</span>
-            <input class="group_form" type="checkbox" id="alter routine" value="alter routine" v-model="checkedNames">
+            <span>replication client</span>
+            <input class="group_form" type="checkbox" id="replic_client" value="replication client" v-model="checkedNames">
             <div class="b-input"></div>
             </label>
 
             <label class="b-contain">
-            <span>execute</span>
-            <input class="group_form" type="checkbox" id="execute" value="execute" v-model="checkedNames">
+            <span>replication slave</span>
+            <input class="group_form" type="checkbox" id="replic_slave" value="replication slave" v-model="checkedNames">
             <div class="b-input"></div>
             </label>
 
             <label class="b-contain">
-            <span>create view</span>
-            <input class="group_form" type="checkbox" id="create_view" value="create view" v-model="checkedNames">
+            <span>create user</span>
+            <input class="group_form" type="checkbox" id="create_user" value="create user" v-model="checkedNames">
             <div class="b-input"></div>
             </label>
-
-            <label class="b-contain">
-            <span>event</span>
-            <input class="group_form" type="checkbox" id="event" value="event" v-model="checkedNames">
-            <div class="b-input"></div>
-            </label>
-
-            <label class="b-contain">
-            <span>trigger</span>
-            <input class="group_form" type="checkbox" id="trigger" value="trigger" v-model="checkedNames">
-            <div class="b-input"></div>
-            </label> -->
         </div>
 
         <!-- <input type="checkbox" id="select" value="select" v-model="checkedNames">
@@ -211,6 +199,7 @@
         <label for="mike">delete</label>
          <input type="checkbox" id="file" value="file" v-model="checkedNames">
         <label for="mike">file</label> -->
+        
     </div>
     <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
@@ -225,7 +214,7 @@
               <md-table >
                 <md-table-row :key=key v-for="(item, key) in user"  slot="md-table-row" >
                   <md-table-cell md-label="Name">{{item}}</md-table-cell>
-                  <md-table-cell md-label="Delete"><md-button @click="deleteUser(item)" class="red-btn">delete</md-button></md-table-cell>
+                  <md-table-cell md-label="Delete"><md-button @click="deleteUser(item)" class="red-btn">Borrar</md-button></md-table-cell>
                    <md-table-cell md-label="Show"><button @click="showDb(item)">Visualizar</button></md-table-cell>
                 </md-table-row>
               </md-table>
@@ -236,12 +225,51 @@
   </div>
 </template>
 <style>
+
+input{
+     padding: 5px;
+     font-size: 16px;
+     border-width: 1px;
+     border-color: #CCCCCC;
+     background-color: #FFFFFF;
+     color: #000000;
+     border-style: solid;
+     border-radius: 0px;
+     box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+     /* text-shadow: 0px 0px 5px rgba(66,66,66,.75); */
+     margin-right: 8px;
+     margin-bottom: 8px;
+}
+input:focus{
+     outline:none;
+}
+
+button{
+color: #20bf6b !important;
+text-transform: uppercase;
+background: #ffffff;
+padding: 15px;
+border: 4px solid #20bf6b !important;
+border-radius: 6px;
+display: inline-block;
+transition: all 0.3s ease 0s;
+}
+button:hover {
+color: #494949 !important;
+border-radius: 50px;
+border-color: #494949 !important;
+transition: all 0.3s ease 0s;
+}
+
+
+
 .estructure{
     margin-left: 15px;
 }
 .container-check{
     display: flex;
     justify-content: flex-start;
+    margin-bottom: 8px;
 }
 .b-contain *, .b-contain *::before, .b-contain *::after {
 	box-sizing: content-box !important;

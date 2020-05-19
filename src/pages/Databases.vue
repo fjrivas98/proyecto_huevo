@@ -1,9 +1,9 @@
 <template>
   <div class="content" v-if="databases != null">
     <div v-if="all">
-      <div :key=item v-for="item in databases">{{item}} <button @click="deleteDatabase(item)">Eliminar</button></div>
+      <!-- <div :key=item v-for="item in databases">{{item}} <button @click="deleteDatabase(item)">Eliminar</button></div> -->
       <input type="text"  v-model="value_input" id="database-input" name="database">
-      <button  @click="createDatabase()">Create database</button>
+      <button  @click="createDatabase()">Crear base de datos</button>
       <div
           class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
         >
@@ -17,7 +17,7 @@
               <md-table >
                 <md-table-row :key=item v-for="item in databases"  slot="md-table-row" >
                   <md-table-cell md-label="Name">{{item}}</md-table-cell>
-                  <md-table-cell md-label="Delete"><md-button @click="deleteDatabase(item)" class="red-btn">delete</md-button></md-table-cell>
+                  <md-table-cell md-label="Delete"><md-button @click="deleteDatabase(item)" class="red-btn">Borrar</md-button></md-table-cell>
                    <md-table-cell md-label="Show"><button @click="show(item)">Visualizar</button></md-table-cell>
                 </md-table-row>
               </md-table>
@@ -29,6 +29,7 @@
     <div v-else>
       <databaseview
       :name="namedb"
+      v-on:show="show($event)"
       >
       </databaseview>
     </div>
@@ -53,7 +54,7 @@ export default {
   name:"papa",
   methods:{
     show(name){
-      this.all = false;
+      this.all = !this.all;
       this.namedb = name
     },
     refreshData(){

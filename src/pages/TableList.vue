@@ -1,45 +1,49 @@
 <template>
   <div class="content">
-    <div class="md-layout">
-      <div
-        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
-      >
-        <md-card>
-          <md-card-header data-background-color="green">
-            <h4 class="title">Simple Table</h4>
-            <p class="category">Here is a subtitle for this table</p>
-          </md-card-header>
-          <md-card-content>
-            <simple-table table-header-color="green"></simple-table>
-          </md-card-content>
-        </md-card>
-      </div>
-      <databaseview></databaseview>
-      <div
-        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
-      >
-        <md-card class="md-card-plain">
-          <md-card-header data-background-color="green">
-            <h4 class="title">Table on Plain Background</h4>
-            <p class="category">Here is a subtitle for this table</p>
-          </md-card-header>
-          <md-card-content>
-            <ordered-table></ordered-table>
-          </md-card-content>
-        </md-card>
-      </div>
-    </div>
+    <button  @click="createBackup()">Crear Copia de Seguridad de la Base de datos</button>
   </div>
 </template>
 
 <script>
+const $ = require('jquery')
+import Swal from 'sweetalert2'
 import { SimpleTable, OrderedTable ,Databaseview} from "@/components";
 
 export default {
-  components: {
-    Databaseview,
-    OrderedTable,
-    SimpleTable
+  methods:{
+    createBackup(){
+      
+        var that = this;
+            var obj={
+            }
+        $.ajax({
+          url: "http://localhost/proyecto/proyecto/public/create_backup.php",
+          type: 'post',
+          data:obj,
+          success: function (data) {
+            if(data == true){
+              Swal.fire(
+              'Enhorabuena!',
+              'Volcado de la Base de Datos realizada con éxito!',
+              'success'
+              )
+            }else{
+              Swal.fire(
+              'Error!',
+              'Hubo un problema al crear la copia de seguridad',
+              'error'
+              )
+            }
+          },
+          error: function (jqXHR, textStatus, error) {
+            console.error(error)
+          }
+        });
+    }
   }
+
+
+
 };
+
 </script>

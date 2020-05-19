@@ -31,16 +31,13 @@
         <md-icon>bubble_chart</md-icon>
         <p>Kenosementiende</p>
       </sidebar-link>
+      <a href="http://localhost/proyecto/proyecto/public/import.php" class="MyBoton">Importar</a>
     </side-bar>
 
     <div class="main-panel">
       <top-navbar></top-navbar>
 
-      <fixed-plugin
-        :color.sync="sidebarBackground"
-        :image.sync="sidebarBackgroundImage"
-      >
-      </fixed-plugin>
+    
 
       <dashboard-content> </dashboard-content>
 
@@ -56,15 +53,13 @@ import TopNavbar from "./TopNavbar.vue";
 import ContentFooter from "./ContentFooter.vue";
 import DashboardContent from "./Content.vue";
 import MobileMenu from "@/pages/Layout/MobileMenu.vue";
-import FixedPlugin from "./Extra/FixedPlugin.vue";
 
 export default {
   components: {
     TopNavbar,
     DashboardContent,
     ContentFooter,
-    MobileMenu,
-    FixedPlugin
+    MobileMenu
   },
   data() {
     return {
@@ -72,6 +67,27 @@ export default {
       sidebarBackgroundImage: require("@/assets/img/sidebar-2.jpg")
     };
   },
-  
+  // methods: {
+  //   onClickButton () {
+  //     location.href = 'http://localhost/proyecto/proyecto/public/import.php'
+  //   }
+  // }
 };
+
+
 </script>
+<style>
+  .MyBoton {
+background-color:transparent;
+	border-radius:4px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Trebuchet MS;
+	font-size:13px;
+	font-weight:bold;
+	padding:15px 76px;
+	text-decoration:none;
+}
+
+</style>
